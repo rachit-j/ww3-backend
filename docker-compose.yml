@@ -1,10 +1,9 @@
-version: '3'
+version: "3.0"
+
 services:
-  web:
-    image: java_springv1
-    build: .
+  hello-world:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
     ports:
-      - "8085:8085"
-    volumes:
-       - ./volumes:/volumes
-    restart: unless-stopped
+      - 8080:8080

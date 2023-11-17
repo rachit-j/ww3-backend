@@ -1,9 +1,27 @@
-# syntax=docker/dockerfile:1
-FROM openjdk:18-alpine3.13
-WORKDIR /app
-RUN apk update && apk upgrade && \
-    apk add --no-cache git 
-COPY . /app
-RUN ./mvnw package
-CMD ["java", "-jar", "target/spring-0.0.1-SNAPSHOT.jar"]
-EXPOSE 8085
+# Maven build container 
+
+FROM maven:3.8.5-openjdk-11 AS maven_build
+
+COPY pom.xml /tmp/
+
+COPY src /tmp/src/
+
+WORKDIR /tmp/
+
+RUN mvn package
+
+#pull base image
+
+FROM eclipse-temurin:11
+
+#maintainer 
+MAINTAINER dstar55@yahoo.com
+#expose port 8080
+EXPOSE 8080
+
+#default command
+CMD java -jar /data/hello-world-0.1.0.jar
+
+#copy hello world to docker image from builder image
+
+COPY --from=maven_build /tmp/target/hello-world-0.1.0.jar /data/hello-world-0.1.0.jar
