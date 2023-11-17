@@ -2,7 +2,7 @@ package com.nighthawk.spring_portfolio.mvc.note;
 
 import java.util.List;
 
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 
