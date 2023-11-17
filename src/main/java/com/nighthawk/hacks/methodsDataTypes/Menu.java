@@ -109,7 +109,7 @@ class Driver {
             new MenuRow("Do Nothing", () -> DoNothingByValue.main(null)),
             new MenuRow("Swap if Hi-Low", () -> IntByReference.main(null)),
             new MenuRow("Matrix Reverse", () -> Matrix.main(null)),
-            new MenuRow("Diverse Array", () -> Matrix.main(null)),
+            new MenuRow("Diverse Array", () -> DiverseArray.main(null)),
             new MenuRow("Random Squirrels", () -> Number.main(null))
         };
 
