@@ -2,10 +2,17 @@ package com.nighthawk.spring_portfolio.mvc.card;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+
 
 public class CardGeneration {
-    public static List<Card> getAllCards() {
-        List<Card> cards = new ArrayList<>();
+
+    @Bean
+    CommandLineRunner commandLineRunner(
+        CardJpaRepository repository){
+        return args -> {
+            List<Card> cards = new ArrayList<>();
 
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
@@ -48,6 +55,10 @@ public class CardGeneration {
             }
         }
 
-        return cards;
+        
+            repository.saveAll(
+                cards
+            );
+        }; 
     }
 }
