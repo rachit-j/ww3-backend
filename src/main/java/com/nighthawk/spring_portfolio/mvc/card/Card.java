@@ -1,11 +1,9 @@
 package com.nighthawk.spring_portfolio.mvc.card;
 
-import com.vladmihalcea.hibernate.type.json.JsonType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@TypeDef(name="json", typeClass=JsonType.class)
+// @TypeDef(name="json", typeClass=JsonType.class)
 @Table(name = "card")
 
 
@@ -26,8 +24,7 @@ public class Card {
     private Long id; 
 
     @NotEmpty
-    @Size(min=5)
-    @Column(unique=true)
+    @JsonProperty("rank")
     private String rank; 
     private String suit; 
 

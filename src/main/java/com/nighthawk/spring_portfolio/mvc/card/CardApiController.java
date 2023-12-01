@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/card")
+@RequestMapping(path = "/api/cards")
 public class CardApiController {
    
     @Autowired
-    private CardJpaRepository repository; 
+    private CardJpaRepository repository;
 
     @GetMapping("/")
-    public ResponseEntity<List<Card>> getCard() {
-        return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<Card>> getCards() {
+        List<Card> cards = repository.findAll();
+        return new ResponseEntity<>(cards, HttpStatus.OK);
     }
     
 }
