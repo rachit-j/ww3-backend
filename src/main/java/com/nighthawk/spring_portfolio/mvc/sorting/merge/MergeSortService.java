@@ -1,16 +1,21 @@
 package com.nighthawk.spring_portfolio.mvc.sorting.merge;
 
 import org.springframework.stereotype.Service;
+import com.nighthawk.spring_portfolio.mvc.sorting.SortResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MergeSortService {
 
-    public List<Integer> sort(List<Integer> input) {
+    public SortResult sort(List<Integer> input) {
+        long startTime = System.nanoTime();
         List<Integer> arr = new ArrayList<>(input);
         mergeSort(arr, 0, arr.size() - 1);
-        return arr;
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        return new SortResult(arr, duration);
     }
 
     private void merge(List<Integer> arr, int l, int m, int r) {

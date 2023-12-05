@@ -1,13 +1,15 @@
 package com.nighthawk.spring_portfolio.mvc.sorting.selection;
 
 import org.springframework.stereotype.Service;
+import com.nighthawk.spring_portfolio.mvc.sorting.SortResult;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class SelectionSortService {
 
-    public List<Integer> sort(List<Integer> input) {
+    public SortResult sort(List<Integer> input) {
+        long startTime = System.nanoTime();
         List<Integer> arr = new ArrayList<>(input);
         int n = arr.size();
 
@@ -24,6 +26,8 @@ public class SelectionSortService {
             arr.set(min_idx, arr.get(i));
             arr.set(i, temp);
         }
-        return arr;
+        long endTime = System.nanoTime();
+        long duration = endTime - startTime;
+        return new SortResult(arr, duration);
     }
 }

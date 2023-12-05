@@ -7,6 +7,7 @@ echo "--------------------------------------------------------------------------
 cd /root/ww3-backend/
 docker-compose down
 git pull .
+./mvnw clean
 docker-compose up -d --build
 echo "----------------------------------------------------------------------------------------------------------------"
 echo "Update Complete. If no changes are shown, please run: service nginx restart. To check the server status, please run: service nginx status"

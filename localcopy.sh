@@ -9,6 +9,7 @@ echo "--------------------------------------------------------------------------
 # cd /root/ww3-backend/
 docker-compose down
 git pull .
+./mvnw clean
 docker-compose up -d --build
 echo "----------------------------------------------------------------------------------------------------------------"
 echo "Update Complete."

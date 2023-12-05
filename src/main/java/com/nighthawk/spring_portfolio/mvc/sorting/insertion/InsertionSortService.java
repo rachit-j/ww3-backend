@@ -1,13 +1,17 @@
 package com.nighthawk.spring_portfolio.mvc.sorting.insertion;
 
 import org.springframework.stereotype.Service;
+import com.nighthawk.spring_portfolio.mvc.sorting.SortResult;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class InsertionSortService {
 
-    public List<Integer> sort(List<Integer> input) {
+    public SortResult sort(List<Integer> input) {
+        long startTime = System.nanoTime(); // Start timing
+
         List<Integer> arr = new ArrayList<>(input);
         int n = arr.size();
         for (int i = 1; i < n; ++i) {
@@ -20,6 +24,10 @@ public class InsertionSortService {
             }
             arr.set(j + 1, key);
         }
-        return arr;
+
+        long endTime = System.nanoTime(); // End timing
+        long duration = (endTime - startTime) / 1000000; // Convert nanoseconds to milliseconds
+
+        return new SortResult(arr, duration);
     }
 }
