@@ -14,7 +14,7 @@ public class MergeSortService {
         List<Integer> arr = new ArrayList<>(input);
         mergeSort(arr, 0, arr.size() - 1);
         long endTime = System.nanoTime();
-        long duration = endTime - startTime;
+        long duration = (endTime - startTime) / 1000000 ; // convert nanoseconds to miliseconds
         return new SortResult(arr, duration);
     }
 

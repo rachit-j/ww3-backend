@@ -27,7 +27,7 @@ public class SelectionSortService {
             arr.set(i, temp);
         }
         long endTime = System.nanoTime();
-        long duration = endTime - startTime;
+        long duration = (endTime - startTime) / 1000000; // convert to ms
         return new SortResult(arr, duration);
     }
 }
