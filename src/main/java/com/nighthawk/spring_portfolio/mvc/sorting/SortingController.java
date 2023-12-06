@@ -4,6 +4,7 @@ import com.nighthawk.spring_portfolio.mvc.sorting.bubble.BubbleSortService;
 import com.nighthawk.spring_portfolio.mvc.sorting.insertion.InsertionSortService;
 import com.nighthawk.spring_portfolio.mvc.sorting.merge.MergeSortService;
 import com.nighthawk.spring_portfolio.mvc.sorting.selection.SelectionSortService;
+import com.nighthawk.spring_portfolio.mvc.sorting.SortingAnalysisService;
 import com.nighthawk.spring_portfolio.mvc.sorting.SortResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,9 @@ public class SortingController {
     @Autowired
     private SelectionSortService selectionSortService;
 
+    @Autowired
+    private SortingAnalysisService sortingAnalysisService;
+
     @GetMapping("/bubble")
     public SortResult bubbleSort(@RequestParam List<Integer> input) {
         return bubbleSortService.sort(input);
@@ -43,5 +47,10 @@ public class SortingController {
     @GetMapping("/selection")
     public SortResult selectionSort(@RequestParam List<Integer> input) {
         return selectionSortService.sort(input);
+    }
+
+    @GetMapping("/analyze")
+    public List<SortResult> analyzeSorts() {
+        return sortingAnalysisService.analyzeSorts();
     }
 }
