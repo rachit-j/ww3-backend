@@ -8,6 +8,7 @@ import com.nighthawk.spring_portfolio.mvc.sorting.SortingAnalysisService;
 import com.nighthawk.spring_portfolio.mvc.sorting.SortResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -49,9 +50,8 @@ public class SortingController {
     @Autowired
     private SortingAnalysisService sortingAnalysisService;
 
-    @PostMapping("/analyze") // Change the annotation to @PostMapping
+    @GetMapping("/analyze") // Change the annotation to @PostMapping
     public List<SortResult> analyzeSorts(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return sortingAnalysisService.analyzeSorts(input);
     }
 }
-
