@@ -6,7 +6,7 @@ echo "Updating and redeploying the ww3-backend. If no changes are shown, please 
 echo "----------------------------------------------------------------------------------------------------------------"
 cd /root/ww3-backend/
 docker-compose down
-git pull .
+git pull
 ./mvnw clean
 docker-compose up -d --build
 echo "----------------------------------------------------------------------------------------------------------------"
