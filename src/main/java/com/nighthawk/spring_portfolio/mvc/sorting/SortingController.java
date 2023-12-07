@@ -26,9 +26,6 @@ public class SortingController {
     @Autowired
     private SelectionSortService selectionSortService;
 
-    @Autowired
-    private SortingAnalysisService sortingAnalysisService;
-
     @GetMapping("/bubble")
     public SortResult bubbleSort(@RequestParam List<Integer> input) {
         return bubbleSortService.sort(input);
@@ -49,8 +46,13 @@ public class SortingController {
         return selectionSortService.sort(input);
     }
 
+    @Autowired
+    private SortingAnalysisService sortingAnalysisService;
+
     @GetMapping("/analyze")
-    public List<SortResult> analyzeSorts() {
-        return sortingAnalysisService.analyzeSorts();
+    public List<SortResult> analyzeSorts(@RequestParam List<Integer> input) {
+        return sortingAnalysisService.analyzeSorts(input);
     }
+
+    
 }

@@ -28,34 +28,34 @@ public class SortingAnalysisService {
     private SelectionSortService selectionSortService;
 
     private static final int NUM_TESTS = 12;
-    private static final int DATA_SIZE = 5000;
 
-    public List<SortResult> analyzeSorts() {
+    public List<SortResult> analyzeSorts(List<Integer> inputList) {
         List<SortResult> results = new ArrayList<>();
 
-        results.add(analyzeSort("Bubble", bubbleSortService));
-        results.add(analyzeSort("Insertion", insertionSortService));
-        results.add(analyzeSort("Merge", mergeSortService));
-        results.add(analyzeSort("Selection", selectionSortService));
+        results.add(analyzeSort("Bubble", bubbleSortService, inputList));
+        results.add(analyzeSort("Insertion", insertionSortService, inputList));
+        results.add(analyzeSort("Merge", mergeSortService, inputList));
+        results.add(analyzeSort("Selection", selectionSortService, inputList));
 
         return results;
     }
 
-    private SortResult analyzeSort(String sortType, SortingServiceInterface sortService) {
+    private SortResult analyzeSort(String sortType, SortingServiceInterface sortService, List<Integer> inputList) {
         List<Long> times = new ArrayList<>();
         List<Integer> comparisons = new ArrayList<>();
         List<Integer> swaps = new ArrayList<>();
         List<Integer> representativeSortedList = null;
 
         for (int i = 0; i < NUM_TESTS; i++) {
-            List<Integer> testData = generateRandomData(DATA_SIZE);
+            // Clone the input list to avoid modifying the original list
+            List<Integer> testData = new ArrayList<>(inputList);
             SortResult result = sortService.sort(testData);
 
             times.add(result.getTimeTakenMs());
             comparisons.add(result.getComparisons());
             swaps.add(result.getSwaps());
 
-            if (i == 0) { // Store the sorted list from the first run as representative
+            if (i == 0) {
                 representativeSortedList = result.getSortedList();
             }
         }
@@ -64,7 +64,7 @@ public class SortingAnalysisService {
         Collections.sort(comparisons);
         Collections.sort(swaps);
 
-        // Remove highest and lowest
+        // Remove the highest and lowest values
         times.remove(0);
         times.remove(times.size() - 1);
         comparisons.remove(0);
@@ -79,13 +79,5 @@ public class SortingAnalysisService {
 
         // Return a new SortResult with averages and the sort type
         return new SortResult(sortType, representativeSortedList, avgTime, 0, avgComparisons, avgSwaps);
-    }
-
-    private List<Integer> generateRandomData(int size) {
-        List<Integer> data = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            data.add((int) (Math.random() * 10000)); // Random integers up to 10,000
-        }
-        return data;
     }
 }
