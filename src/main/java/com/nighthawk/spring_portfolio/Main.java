@@ -13,16 +13,15 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
-    // Add this method to configure CORS
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // Adjust this to match the domain from which you expect to receive requests
-                // Use "*" to allow all origins (not recommended for production)
-                registry.addMapping("/**").allowedOrigins("https://rachit-j.github.io");
-                registry.addMapping("/**").allowedOrigins("127.0.0.1:5500");
+                registry.addMapping("/**")
+                        .allowedOrigins("https://rachit-j.github.io", "http://127.0.0.1:5500")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*");
             }
         };
     }
