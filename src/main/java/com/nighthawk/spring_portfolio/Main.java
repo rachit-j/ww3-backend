@@ -22,6 +22,7 @@ public class Main {
                 // Adjust this to match the domain from which you expect to receive requests
                 // Use "*" to allow all origins (not recommended for production)
                 registry.addMapping("/**").allowedOrigins("https://rachit-j.github.io");
+                registry.addMapping("/**").allowedOrigins("127.0.0.1:5500");
             }
         };
     }
