@@ -50,7 +50,7 @@ public class SortingController {
     @Autowired
     private SortingAnalysisService sortingAnalysisService;
 
-    @GetMapping("/analyze") // Change the annotation to @PostMapping
+    @PostMapping("/analyze") // Change the annotation to @PostMapping
     public List<SortResult> analyzeSorts(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return sortingAnalysisService.analyzeSorts(input);
     }
