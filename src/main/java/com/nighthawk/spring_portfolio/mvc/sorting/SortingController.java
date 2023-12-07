@@ -26,33 +26,32 @@ public class SortingController {
     @Autowired
     private SelectionSortService selectionSortService;
 
-    @GetMapping("/bubble")
-    public SortResult bubbleSort(@RequestParam List<Integer> input) {
+    @PostMapping("/bubble") // Change the annotation to @PostMapping
+    public SortResult bubbleSort(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return bubbleSortService.sort(input);
     }
 
-    @GetMapping("/insertion")
-    public SortResult insertionSort(@RequestParam List<Integer> input) {
+    @PostMapping("/insertion") // Change the annotation to @PostMapping
+    public SortResult insertionSort(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return insertionSortService.sort(input);
     }
 
-    @GetMapping("/merge")
-    public SortResult mergeSort(@RequestParam List<Integer> input) {
+    @PostMapping("/merge") // Change the annotation to @PostMapping
+    public SortResult mergeSort(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return mergeSortService.sort(input);
     }
 
-    @GetMapping("/selection")
-    public SortResult selectionSort(@RequestParam List<Integer> input) {
+    @PostMapping("/selection") // Change the annotation to @PostMapping
+    public SortResult selectionSort(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return selectionSortService.sort(input);
     }
 
     @Autowired
     private SortingAnalysisService sortingAnalysisService;
 
-    @GetMapping("/analyze")
-    public List<SortResult> analyzeSorts(@RequestParam List<Integer> input) {
+    @PostMapping("/analyze") // Change the annotation to @PostMapping
+    public List<SortResult> analyzeSorts(@RequestBody List<Integer> input) { // Use @RequestBody to receive the input data
         return sortingAnalysisService.analyzeSorts(input);
     }
-
-    
 }
+
