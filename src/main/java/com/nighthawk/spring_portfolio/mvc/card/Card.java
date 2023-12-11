@@ -1,35 +1,31 @@
 package com.nighthawk.spring_portfolio.mvc.card;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-// @TypeDef(name="json", typeClass=JsonType.class)
-@Table(name = "card")
-
+@Table(name="card")
 
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id; 
+    private Long id;
 
-    @NotEmpty
-    @JsonProperty("rank")
-    private String rank; 
-    private String suit; 
+    private Integer rank;
 
-    public Card(String rank, String suit) {
-        this.rank = rank; 
-        this.suit = suit; 
+    public Card(Integer rank) {
+        this.rank = rank;
     }
+
+// commit change 
+
 }
