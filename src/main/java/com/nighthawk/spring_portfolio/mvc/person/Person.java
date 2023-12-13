@@ -4,28 +4,25 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Convert;
-import static jakarta.persistence.FetchType.EAGER;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
@@ -47,6 +44,16 @@ The last annotation connect to database
 @Convert(attributeName ="person", converter = JsonType.class)
 public class Person {
 
+    // Rachit's Modifications
+    // Mapping to roles
+    @ManyToMany(fetch = EAGER)  // Corrected FetchType usage
+    @JoinTable(
+        name = "person_roles", 
+        joinColumns = @JoinColumn(name = "person_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<PersonRole> roles = new HashSet<>();
+
     // automatic unique identifier for Person record
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,17 +69,12 @@ public class Person {
     @NotEmpty
     private String password;
 
-    // @NonNull, etc placed in params of constructor: "@NonNull @Size(min = 2, max = 30, message = "Name (2 to 30 chars)") String name"
     @NonNull
     @Size(min = 2, max = 30, message = "Name (2 to 30 chars)")
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
-
-    // To be implemented
-    @ManyToMany(fetch = EAGER)
-    private Collection<PersonRole> roles = new ArrayList<>();
 
     /* HashMap is used to store JSON for daily "stats"
     "stats": {
@@ -84,8 +86,7 @@ public class Person {
     */
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb")
-    private Map<String,Map<String, Object>> stats = new HashMap<>(); 
-    
+    private Map<String, Map<String, Object>> stats = new HashMap<>(); 
 
     // Constructor used when building object from an API
     public Person(String email, String password, String name, Date dob) {
@@ -99,7 +100,8 @@ public class Person {
     public int getAge() {
         if (this.dob != null) {
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            return Period.between(birthDay, LocalDate.now()).getYears(); }
+            return Period.between(birthDay, LocalDate.now()).getYears();
+        }
         return -1;
     }
 

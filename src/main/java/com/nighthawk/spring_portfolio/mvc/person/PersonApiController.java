@@ -26,6 +26,34 @@ public class PersonApiController {
     @Autowired
     private PersonDetailsService personDetailsService;
 
+    // Rachit's Code
+    @PostMapping("/{personId}/roles/{roleId}")
+    public ResponseEntity<?> addRoleToPerson(@PathVariable Long personId, @PathVariable Long roleId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new RuntimeException("Person not found with id: " + personId));
+        PersonRole role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found with id: " + roleId));
+
+        person.getRoles().add(role);
+        personRepository.save(person);
+
+        return ResponseEntity.ok().build();
+    }
+
+    // Endpoint to remove a role from a person
+    @DeleteMapping("/{personId}/roles/{roleId}")
+    public ResponseEntity<?> removeRoleFromPerson(@PathVariable Long personId, @PathVariable Long roleId) {
+        Person person = personRepository.findById(personId)
+                .orElseThrow(() -> new RuntimeException("Person not found with id: " + personId));
+        PersonRole role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found with id: " + roleId));
+
+        person.getRoles().remove(role);
+        personRepository.save(person);
+
+        return ResponseEntity.ok().build();
+    }
+
     /*
     GET List of People
      */
