@@ -66,7 +66,12 @@ public class Doctor {
 
     
 
-
+    public Doctor(String email, String password, String name, String uname) {
+        this.uname = uname;
+        this.password = password;
+        this.name = name;
+        this.name = name;
+    }
 
 
 
