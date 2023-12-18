@@ -74,6 +74,12 @@ public class Doctor {
     }
 
 
+    public String name() {
+        if (this.name != null) {
+            return this.name;
+        }
+        return "-1";
+    }
 
 
 }
