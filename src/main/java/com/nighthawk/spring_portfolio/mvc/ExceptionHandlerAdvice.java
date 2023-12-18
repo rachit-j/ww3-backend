@@ -11,12 +11,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @ControllerAdvice
 public class ExceptionHandlerAdvice {
     
-    @ExceptionHandler(JsonProcessingException.class)
-    public ResponseEntity<String> jsonProcessingException(JsonProcessingException e) {
+    @ExceptionHandler(JsonProcessingException.class) // defines as a method that handles this specific error
+    public ResponseEntity<String> jsonProcessingException(JsonProcessingException e) { 
         // log exception
-        return ResponseEntity
+        return ResponseEntity // Returns a response
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("JSON failed to process");
+                .body("JSON failed to process"); // response message
     } 
     
     @ExceptionHandler(JsonMappingException.class)
