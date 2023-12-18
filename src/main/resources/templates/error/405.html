@@ -1,22 +1,42 @@
-<!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layouts/base}" lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
-    <title>405 error</title>
+    <title>Method Not Allowed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #e74c3c;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
 </head>
-
 <body>
-<th:block layout:fragment="body" th:remove="tag">
-    <div class="px-4 py-5 my-5 text-center">
-        <h3 class="display-5 fw-bold">HTTP Status 405 – Method Not Allowed</h3>
-
-        <div class="jumbotron jumbotron-fluid" style="text-align: center; ">
-            <h4>Method understood but incorrect format provided!</h4>
-            <a href="/">Go Home</a>
-        </div>
-    </div>
-</th:block>>
+    <h1>Oops! 405 - Method Not Allowed</h1>
+    <p>Sorry, the method you tried to use is not allowed on this URL.</p>
+    <p>It's like trying to use a key on the wrong door. Let's find the right one!</p>
+    <a href="/">Go Home</a>
 </body>
-
 </html>

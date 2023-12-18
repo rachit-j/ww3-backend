@@ -159,8 +159,18 @@ public class Person {
         } catch (Exception e) {
         }
 
+        Person p6 = new Person();
+        p6.setName("Rachit Jaiswal");
+        p6.setEmail("rjaiswal.sd.77@gmail.com");
+        p6.setPassword("Rachit12#");
+        try {
+            Date d = new SimpleDateFormat("MM-dd-yyyy").parse("07-22-2007");
+            p6.setDob(d);
+        } catch (Exception e) {
+        }
+
         // Array definition and data initialization
-        Person persons[] = {p1, p2, p3, p4, p5};
+        Person persons[] = {p1, p2, p3, p4, p5, p6};
         return(persons);
     }
 
