@@ -8,15 +8,30 @@
 
 <body>
 <th:block layout:fragment="body" th:remove="tag">
-    <div class="px-4 py-5 my-5 text-center">
-        <h3 class="display-5 fw-bold">HTTP Status 404 – Endpoint Error</h3>
-
-        <div class="jumbotron jumbotron-fluid" style="text-align: center; ">
-            <h4>Engineering is on the case!</h4>
-            <a href="/">Go Home</a>
-        </div>
+    <h1>Oops!</h1>
+    <p>403 - Forbidden</p>
+    <div class="error-message">
+        <p>Sorry, you don't have permission to access this page.</p>
+        <p><a href="/">Go back to the homepage</a></p>
     </div>
+
+    <div class="game">
+        <p>While you're here, try guessing a number between 1 and 10:</p>
+        <input type="number" id="guess" min="1" max="10">
+        <button onclick="playGame()">Guess</button>
+        <p id="gameResult"></p>
+    </div>
+
+    <script>
+        function playGame() {
+            var userGuess = document.getElementById('guess').value;
+            var randomNumber = Math.floor(Math.random() * 10) + 1;
+            var result = userGuess == randomNumber ? 'Congratulations! You guessed right.' : 'Sorry, wrong guess. The number was ' + randomNumber + '.';
+            document.getElementById('gameResult').innerText = result;
+        }
+    </script>
 </th:block>>
 </body>
 
 </html>
+
